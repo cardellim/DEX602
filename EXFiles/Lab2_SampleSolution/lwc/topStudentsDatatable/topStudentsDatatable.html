@@ -1,0 +1,15 @@
+<template>
+	<lightning-card title="Top 5 Students by Certifications">
+		<template lwc:if={loading}>
+			<lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+		</template>
+
+		<template lwc:if={rows}>
+			<lightning-datatable key-field="id" data={rows} columns={columns} hide-checkbox-column> </lightning-datatable>
+		</template>
+
+		<template lwc:if={error}>
+			<div class="slds-text-color_error slds-p-around_small">An error occurred while loading data.</div>
+		</template>
+	</lightning-card>
+</template>

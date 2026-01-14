@@ -1,0 +1,25 @@
+<template>
+	<c-student-browser-form onfilterchange={handleFilterChange}></c-student-browser-form>
+	<lightning-tabset variant="scoped">
+
+		<!-- Extension 11 - fire an event when the tab is active -->
+		<lightning-tab label="Gallery" onactive={handleTabActive}>
+			<div class="slds-scrollable scrollerSize" >
+				<c-student-tiles student-list={students.data}
+					onstudentselected={handleStudentSelected}>
+				</c-student-tiles>
+			</div>
+		</lightning-tab>
+
+		<!-- Extension 11 - fire an event when the tab is active -->
+		<lightning-tab label="Grid" onactive={handleTabActive}>
+			<div class="slds-scrollable scrollerSize" >
+				<c-responsive-datatable pk-field="Id" column-config={cols} 
+					row-data={students.data} 
+					onrowclick={handleRowClick} 
+					onrowdblclick={handleRowDblClick} ></c-responsive-datatable>
+			</div>
+		</lightning-tab>
+		
+    </lightning-tabset>
+</template>
