@@ -1,7 +1,9 @@
 {
-    "codeBuilder.showWelcomePage": false,
-    "explorer.compactFolders": false,
-    "editor.formatOnSave": true,
-    "workbench.editor.enablePreview": false,
-    "editor.minimap.enabled": false
+	"codeBuilder.showWelcomePage": false,
+	"explorer.compactFolders": false,
+	"editor.formatOnSave": true,
+	"workbench.editor.enablePreview": false,
+	"editor.minimap.enabled": false,
+	"xml.preferences.showSchemaDocumentationType": "none",
+	"salesforce.einsteinForDevelopers.enable": false
 }
