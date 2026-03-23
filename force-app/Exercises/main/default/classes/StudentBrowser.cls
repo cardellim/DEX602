@@ -21,7 +21,6 @@ public with sharing class StudentBrowser {
             }
             query += 'WITH SECURITY_ENFORCED ';
             query += 'ORDER BY Name';
-            
             return Database.query(query);
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());

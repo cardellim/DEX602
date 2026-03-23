@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
     <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>challenge_currentDateTime</componentName>
+                <identifier>c_challenge_currentDateTime</identifier>
+            </componentInstance>
+        </itemInstances>
         <mode>Replace</mode>
         <name>top</name>
         <type>Region</type>
     </flexiPageRegions>
     <flexiPageRegions>
         <itemInstances>
-            <componentInstance><identifier>Id1001</identifier>
+            <componentInstance>
                 <componentName>propsDemo</componentName>
+                <identifier>Id1001</identifier>
             </componentInstance>
         </itemInstances>
         <mode>Replace</mode>
@@ -17,7 +24,7 @@
     </flexiPageRegions>
     <flexiPageRegions>
         <itemInstances>
-            <componentInstance><identifier>Id1002</identifier>
+            <componentInstance>
                 <componentInstanceProperties>
                     <name>decorate</name>
                     <value>true</value>
@@ -27,6 +34,7 @@
                     <value>&lt;p&gt;&lt;b&gt;Welcome to DEX602!&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;This is a custom homepage for the Certification app. It is used to hold the Props Demo component that your instructor will use to teach you about the @track decorator.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;If you elect to compete any of the daily Extra Credit challenges, you will place them on this page as well.&lt;/p&gt;</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:richText</componentName>
+                <identifier>Id1002</identifier>
             </componentInstance>
         </itemInstances>
         <mode>Replace</mode>

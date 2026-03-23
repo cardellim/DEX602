@@ -55,6 +55,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>StudentBrowser</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>TripReportsData</apexClass>
         <enabled>true</enabled>
     </classAccesses>
