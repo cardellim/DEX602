@@ -1,14 +1,15 @@
 import { LightningElement, wire } from "lwc";
-import { subscribe, unsubscribe, MessageContext } from 'lightning/messageService';
+import { NavigationMixin } from "lightning/navigation";
+import { subscribe, unsubscribe, MessageContext } from "lightning/messageService";
 import { getRecord, getFieldValue, getFieldDisplayValue } from "lightning/uiRecordApi";
 import FIELD_NAME from "@salesforce/schema/Contact.Name";
 import FIELD_DESCRIPTION from "@salesforce/schema/Contact.Description";
 import FIELD_EMAIL from "@salesforce/schema/Contact.Email";
 import FIELD_PHONE from "@salesforce/schema/Contact.Phone";
-import SELECTED_STUDENT_CHANNEL from '@salesforce/messageChannel/SelectedStudentChannel__c';
+import SELECTED_STUDENT_CHANNEL from "@salesforce/messageChannel/SelectedStudentChannel__c";
 const fields = [FIELD_NAME, FIELD_DESCRIPTION, FIELD_EMAIL, FIELD_PHONE];
 
-export default class StudentDetail extends LightningElement {
+export default class StudentDetail extends NavigationMixin(LightningElement) {
 	studentId; // = "003C200000KXhQrIAL";
 	subscription;
 
@@ -17,10 +18,6 @@ export default class StudentDetail extends LightningElement {
 	@wire(getRecord, { recordId: "$studentId", fields })
 	wiredStudent;
 	@wire(MessageContext) messageContext;
-
-	get name() {
-		return this._getDisplayValue(this.wiredStudent.data, FIELD_NAME);
-	}
 
 	//TODO #5: We provided a getter for the name field.
 	// 		   To prepare for Lab 1, create getters for the description, phone, and email fields.
@@ -56,7 +53,7 @@ export default class StudentDetail extends LightningElement {
 			return;
 		}
 		this.subscription = subscribe(this.messageContext, SELECTED_STUDENT_CHANNEL, (message) => {
-			this.handleStudentChange(message)
+			this.handleStudentChange(message);
 		});
 	}
 
@@ -67,5 +64,15 @@ export default class StudentDetail extends LightningElement {
 	disconnectedCallback() {
 		unsubscribe(this.subscription);
 		this.subscription = null;
+	}
+
+	navigateToRecord() {
+		this[NavigationMixin.Navigate]({
+			type: "standard__recordPage",
+			attributes: {
+				recordId: this.studentId,
+				actionName: "view"
+			}
+		});
 	}
 }
