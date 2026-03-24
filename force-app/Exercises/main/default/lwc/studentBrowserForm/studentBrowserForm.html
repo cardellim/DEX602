@@ -27,6 +27,10 @@
 							onchange={handleDeliveryChange}
 						></lightning-combobox>
 					</lightning-layout-item>
+					<!-- Add New Delivery button (enabled if instructor selected) -->
+					<lightning-layout-item padding="around-small">
+						<lightning-button variant="brand" disabled={isButtonDisabled} label="Add New Delivery" onclick={handleAddNewDelivery}></lightning-button>
+					</lightning-layout-item>
 				</lightning-layout>
 			</div>
 		</lightning-card>
