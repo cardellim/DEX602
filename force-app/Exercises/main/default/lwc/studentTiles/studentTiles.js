@@ -1,5 +1,10 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api } from "lwc";
 
 export default class StudentTiles extends LightningElement {
-    @api studentList = [];
+	@api studentList = [];
+	selectedStudentId = "";
+
+	handleStudentSelected(event) {
+		this.selectedStudentId = event.detail.studentId;
+	}
 }
