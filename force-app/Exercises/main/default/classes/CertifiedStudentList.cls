@@ -19,4 +19,13 @@ public with sharing class CertifiedStudentList {
             throw new AuraHandledException(e.getMessage());
         }
     }
+
+    @AuraEnabled
+    public static void deleteStudentCertification(List<String> certificationHeldIds){
+        try {
+            delete[SELECT Id FROM Certification_Held__c WHERE Id IN :certificationHeldIds];
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
 }
