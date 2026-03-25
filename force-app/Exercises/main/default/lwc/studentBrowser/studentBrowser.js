@@ -7,6 +7,27 @@ export default class StudentBrowser extends LightningElement {
 	selectedInstructorId = "";
 	selectedDeliveryId = "";
 	@wire(getStudents, { instructorId: "$selectedInstructorId", courseDeliveryId: "$selectedDeliveryId" }) students;
+	cols = [
+		{
+			fieldName: "Name",
+			label: "Name"
+		},
+		{
+			fieldName: "Title",
+			label: "Title",
+			hiddenOnMobile: true
+		},
+		{
+			fieldName: "Phone",
+			label: "Phone",
+			type: "phone"
+		},
+		{
+			fieldName: "Email",
+			label: "E-Mail",
+			type: "email"
+		}
+	];
 	@wire(MessageContext) messageContext;
 
 	handleFilterChange(event) {
