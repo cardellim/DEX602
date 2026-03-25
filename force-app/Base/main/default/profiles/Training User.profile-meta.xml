@@ -323,6 +323,10 @@
         <visibility>Hidden</visibility>
     </tabVisibilities>
     <tabVisibilities>
+        <tab>AwInstructors_Cmp_Tab</tab>
+        <visibility>Hidden</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
         <tab>Certification__c</tab>
         <visibility>Hidden</visibility>
     </tabVisibilities>

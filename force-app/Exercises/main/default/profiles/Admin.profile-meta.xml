@@ -10,6 +10,11 @@
         <default>false</default>
         <visible>false</visible>
     </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__LightningSales</application>
+        <default>false</default>
+        <visible>true</visible>
+    </applicationVisibilities>
     <classAccesses>
         <apexClass>AccountsData</apexClass>
         <enabled>true</enabled>
@@ -39,7 +44,15 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>CourseDeliveries</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>CourseDeliveriesData</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>CourseDeliveryLocations</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -56,6 +69,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>StudentBrowser</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>StudentBrowserForm</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -369,6 +386,10 @@
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
+        <tab>AwInstructors_Cmp_Tab</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
         <tab>Certification__c</tab>
         <visibility>Hidden</visibility>
     </tabVisibilities>
@@ -379,6 +400,10 @@
     <tabVisibilities>
         <tab>Course__c</tab>
         <visibility>Hidden</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>Deliveries_Map</tab>
+        <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
         <tab>TripReport__c</tab>
