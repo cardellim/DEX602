@@ -42,6 +42,14 @@ export default class StudentBrowser extends NavigationMixin(LightningElement) {
 	}
 
 	updateSelectedStudent(studentId) {
+		const gallery = this.template.querySelector("c-student-tiles");
+		const grid = this.template.querySelector("c-responsive-datatable");
+		if (gallery) {
+			gallery.setSelectedStudent(studentId);
+		}
+		if (grid) {
+			grid.setSelectedRecord(studentId);
+		}
 		publish(this.messageContext, SELECTED_STUDENT_CHANNEL, {
 			studentId: studentId
 		});
