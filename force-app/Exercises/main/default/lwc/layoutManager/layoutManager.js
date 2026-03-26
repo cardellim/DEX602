@@ -10,6 +10,8 @@ export default class LayoutManager extends LightningElement {
 	viewMode = VIEW_STUDENT_BROWSER;
 	certificationName = "";
 	certificationId = 0;
+	modalHeader = '';
+	modalContent = '';
 
 	handleNavItemSelected(event) {
 		const selectedItemName = event.detail.itemName;
@@ -39,6 +41,18 @@ export default class LayoutManager extends LightningElement {
 	}
 	get certPopularityView() {
 		return this.viewMode === VIEW_POPULARITY;
+	}
+
+	handleShowModal(event) {
+		this.modalHeader = event.detail.header;
+		this.modalContent = event.detail.content;
+		const modal = this.template.querySelector('c-modal');
+		modal.show();
+	}
+
+	handleCloseModal() {
+		const modal = this.template.querySelector('c-modal');
+		modal.hide();
 	}
 
 	connectedCallback() {
