@@ -1,4 +1,5 @@
 import { LightningElement } from "lwc";
+import Utils from 'c/utils';
 
 const VIEW_STUDENT_BROWSER = "students";
 const VIEW_TRIP_REPORTS = "tripreports";
@@ -38,5 +39,14 @@ export default class LayoutManager extends LightningElement {
 	}
 	get certPopularityView() {
 		return this.viewMode === VIEW_POPULARITY;
+	}
+
+	connectedCallback() {
+		Utils.showToast(
+			this,
+			'Welcome',
+			`Don't forget to check back here for updated class schedules and assignments`,
+			'info'
+		);
 	}
 }
