@@ -1,6 +1,7 @@
 import { LightningElement, api, wire } from "lwc";
 import { refreshApex } from "@salesforce/apex";
 import Utils from "c/utils";
+import LABEL_FEATURE_NOT_AVAILABLE from "@salesforce/label/c.Feature_Not_Available";
 import getCertifiedStudents from "@salesforce/apex/CertifiedStudentList.getCertifiedStudents";
 import deleteStudentCertification from "@salesforce/apex/CertifiedStudentList.deleteStudentCertification";
 
@@ -54,7 +55,7 @@ export default class CertifiedStudentList extends LightningElement {
 	}
 
 	notAvailable() {
-		Utils.showModal(this, "Not Available", `This feature is currently unavailable`);
+		Utils.showModal(this, "Not Available", LABEL_FEATURE_NOT_AVAILABLE);
 	}
 
 	handleRowSelection(event) {
