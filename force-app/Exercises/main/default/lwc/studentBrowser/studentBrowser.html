@@ -8,7 +8,8 @@
 		</lightning-tab>
 		<lightning-tab label="Grid">
 			<div class="slds-scrollable scrollerSize">
-				<c-responsive-datatable pk-field="Id" column-config={cols} row-data={students.data} onrowdblclick={handleRowDblClick} stack-on-mobile> </c-responsive-datatable>
+				<c-responsive-datatable pk-field="Id" column-config={cols} row-data={students.data} onrowclick={handleRowClick} onrowdblclick={handleRowDblClick} stack-on-mobile>
+				</c-responsive-datatable>
 			</div>
 		</lightning-tab>
 	</lightning-tabset>
