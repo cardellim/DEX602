@@ -11,7 +11,7 @@ export default class StudentBrowser extends NavigationMixin(LightningElement) {
 	wired_getStudents(result) {
 		if ((result.data) || (result.error)) {
 			this.students = result;
-			this.dispatchEvent(new CustomEvent('doneloading', { bubbles: true, composed: true}));
+			this.dispatchEvent(new CustomEvent("doneloading", { bubbles: true, composed: true}));
 		}
 	}
 	cols = [
