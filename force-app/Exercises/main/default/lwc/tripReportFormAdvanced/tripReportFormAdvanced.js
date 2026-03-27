@@ -1,5 +1,5 @@
 import { LightningElement, api, wire } from "lwc";
-import { createRecord, getFieldValue, getRecord, updateRecord } from 'lightning/uiRecordApi';
+import { createRecord, getFieldValue, getRecord, updateRecord } from "lightning/uiRecordApi";
 import Utils from "c/utils";
 import getInstructors from "@salesforce/apex/StudentBrowserForm.getInstructors";
 import { getObjectInfo, getPicklistValues } from "lightning/uiObjectInfoApi";
@@ -8,16 +8,17 @@ import { reduceErrors } from "c/ldsUtils";
 import OBJECT_TRIP_REPORT from "@salesforce/schema/TripReport__c";
 import FIELD_ID from "@salesforce/schema/TripReport__c.Id";
 import FIELD_DATE from "@salesforce/schema/TripReport__c.Date__c";
-import FIELD_INSTRUCTOR from '@salesforce/schema/TripReport__c.Instructor__c';
-import FIELD_NAME from '@salesforce/schema/TripReport__c.Name';
-import FIELD_RATING from '@salesforce/schema/TripReport__c.Rating__c';
-import FIELD_REVIEWTYPE from '@salesforce/schema/TripReport__c.ReviewType__c';
-import FIELD_REVIEW from '@salesforce/schema/TripReport__c.Review__c';
+import FIELD_INSTRUCTOR from "@salesforce/schema/TripReport__c.Instructor__c";
+import FIELD_NAME from "@salesforce/schema/TripReport__c.Name";
+import FIELD_RATING from "@salesforce/schema/TripReport__c.Rating__c";
+import FIELD_REVIEWTYPE from "@salesforce/schema/TripReport__c.ReviewType__c";
+import FIELD_REVIEW from "@salesforce/schema/TripReport__c.Review__c";
 
 const fieldsToLoad = [FIELD_DATE, FIELD_INSTRUCTOR, FIELD_NAME, FIELD_RATING, FIELD_REVIEWTYPE, FIELD_REVIEW];
 
 export default class TripReportFormAdvanced extends LightningElement {
 	error;
+	saveButtonDisabled = true;
 	_editorInitialized;
 
 	@api recordId;
@@ -40,10 +41,10 @@ export default class TripReportFormAdvanced extends LightningElement {
 		if (data) {
 			this.dateVisited = getFieldValue(data, FIELD_DATE);
 			this.instructorId = getFieldValue(data, FIELD_INSTRUCTOR);
-            this.locationName = getFieldValue(data, FIELD_NAME);
-            this.rating = getFieldValue(data, FIELD_RATING);
-            this.reviewType = getFieldValue(data, FIELD_REVIEWTYPE);
-            this.review = getFieldValue(data, FIELD_REVIEW);
+			this.locationName = getFieldValue(data, FIELD_NAME);
+			this.rating = getFieldValue(data, FIELD_RATING);
+			this.reviewType = getFieldValue(data, FIELD_REVIEWTYPE);
+			this.review = getFieldValue(data, FIELD_REVIEW);
 			this.error = undefined;
 		} else if (error) {
 			this.error = error;
@@ -85,23 +86,23 @@ export default class TripReportFormAdvanced extends LightningElement {
 
 	//TODO #4: set the value of the private properties when they're changed in the form
 	handleInstructorChange(event) {
-        this.instructorId = event.target.value;
-    }
+		this.instructorId = event.target.value;
+	}
 	handleLocationNameChange(event) {
-        this.locationName = event.target.value;
-    }
+		this.locationName = event.target.value;
+	}
 	handleDateVisitedChange(event) {
-        this.dateVisited = event.target.value;
-    }
+		this.dateVisited = event.target.value;
+	}
 	handleReviewTypeChange(event) {
-        this.reviewType = event.target.value;
-    }
+		this.reviewType = event.target.value;
+	}
 	handleRatingChange(event) {
-        this.rating = event.target.value;
-    }
+		this.rating = event.target.value;
+	}
 	handleReviewChange(event) {
-        this.review = event.target.value;
-    }
+		this.review = event.target.value;
+	}
 
 	handleSave() {
 		this.saveTripReport();
@@ -111,13 +112,13 @@ export default class TripReportFormAdvanced extends LightningElement {
 		fieldsToSave[FIELD_DATE.fieldApiName] = this.dateVisited;
 		fieldsToSave[FIELD_INSTRUCTOR.fieldApiName] = this.instructorId;
 		fieldsToSave[FIELD_RATING.fieldApiName] = this.rating;
-        fieldsToSave[FIELD_REVIEWTYPE.fieldApiName] = this.reviewType;
-        fieldsToSave[FIELD_REVIEW.fieldApiName] = this.review;
-        fieldsToSave[FIELD_NAME.fieldApiName] = this.locationName;
+		fieldsToSave[FIELD_REVIEWTYPE.fieldApiName] = this.reviewType;
+		fieldsToSave[FIELD_REVIEW.fieldApiName] = this.review;
+		fieldsToSave[FIELD_NAME.fieldApiName] = this.locationName;
 		//in our request
 
 		if (!this.recordId) {
-            const recordInput = {fields: fieldsToSave, apiName: OBJECT_TRIP_REPORT.objectApiName};
+			const recordInput = { fields: fieldsToSave, apiName: OBJECT_TRIP_REPORT.objectApiName };
 
 			createRecord(recordInput)
 				.then((tripReport) => {
@@ -130,7 +131,7 @@ export default class TripReportFormAdvanced extends LightningElement {
 					Utils.showToast(this, "Error creating record", errorBody, "error");
 				});
 		} else {
-            fieldsToSave[FIELD_ID.fieldApiName] = this.recordId;
+			fieldsToSave[FIELD_ID.fieldApiName] = this.recordId;
 			const recordInput = { fields: fieldsToSave };
 			updateRecord(recordInput)
 				.then(() => {
@@ -142,5 +143,14 @@ export default class TripReportFormAdvanced extends LightningElement {
 					Utils.showToast(this, "Error updating record", errorBody, "error");
 				});
 		}
+	}
+
+	validateFields() {
+		const fields = Array.from(this.template.querySelectorAll(".validateMe"));
+		return fields.every((currentField) => currentField.checkValidity());
+	}
+
+	handleBlur() {
+		this.saveButtonDisabled = !this.validateFields();
 	}
 }
