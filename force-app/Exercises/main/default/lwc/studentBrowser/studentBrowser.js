@@ -8,6 +8,12 @@ export default class StudentBrowser extends NavigationMixin(LightningElement) {
 	selectedInstructorId = "";
 	selectedDeliveryId = "";
 	@wire(getStudents, { instructorId: "$selectedInstructorId", courseDeliveryId: "$selectedDeliveryId" }) students;
+	wired_getStudents(result) {
+		if ((result.data) || (result.error)) {
+			this.students = result;
+			this.dispatchEvent(new CustomEvent('doneloading', { bubbles: true, composed: true}));
+		}
+	}
 	cols = [
 		{
 			fieldName: "Name",
@@ -34,6 +40,7 @@ export default class StudentBrowser extends NavigationMixin(LightningElement) {
 	handleFilterChange(event) {
 		this.selectedInstructorId = event.detail.instructorId;
 		this.selectedDeliveryId = event.detail.deliveryId;
+		this.dispatchEvent(new CustomEvent('loading', {bubbles: true, composed: true}));
 	}
 
 	handleStudentSelected(event) {
