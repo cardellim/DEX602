@@ -3,7 +3,7 @@ import getAll from "@salesforce/apex/TripReportBrowser.getAll";
 
 export default class TripReportBrowser extends LightningElement {
 	selectedRecordId = 0;
-	
+
 	cols = [
 		{
 			fieldName: "Date__c",
@@ -62,5 +62,12 @@ export default class TripReportBrowser extends LightningElement {
 	}
 	handleBtnNewClick() {
 		this.changeTripReportMode("add");
+	}
+
+	handleRowClick(event) {
+		this.selectedRecordId = event.detail.pk;
+	}
+	handleRowDblClick(event) {
+		this.changeTripReportMode('edit');
 	}
 }
