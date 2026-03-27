@@ -85,6 +85,15 @@ export default class TripReportFormAdvanced extends LightningElement {
 	}
 
 	//TODO #4: set the value of the private properties when they're changed in the form
+	validateFields() {
+		const fields = Array.from(this.template.querySelectorAll(".validateMe"));
+		return fields.every((currentField) => currentField.checkValidity());
+	}
+
+	handleBlur() {
+		this.saveButtonDisabled = !this.validateFields();
+	}
+
 	handleInstructorChange(event) {
 		this.instructorId = event.target.value;
 	}
@@ -107,6 +116,16 @@ export default class TripReportFormAdvanced extends LightningElement {
 	handleSave() {
 		this.saveTripReport();
 	}
+
+	returnToBrowseMode() {
+		const evt = new CustomEvent("tripreportmodechange", {
+			detail: {
+				mode: "browse"
+			}
+		});
+		this.dispatchEvent(evt);
+	}
+
 	saveTripReport() {
 		const fieldsToSave = {};
 		fieldsToSave[FIELD_DATE.fieldApiName] = this.dateVisited;
@@ -124,6 +143,7 @@ export default class TripReportFormAdvanced extends LightningElement {
 				.then((tripReport) => {
 					this.recordId = tripReport.id;
 					Utils.showToast(this, "Success", "Trip Report Created", "success");
+					this.returnToBrowseMode();
 				})
 				.catch((error) => {
 					let errors = reduceErrors(error);
@@ -136,6 +156,7 @@ export default class TripReportFormAdvanced extends LightningElement {
 			updateRecord(recordInput)
 				.then(() => {
 					Utils.showToast(this, "Success", "Trip report updated", "success");
+					this.returnToBrowseMode();
 				})
 				.catch((error) => {
 					let errors = reduceErrors(error);
@@ -143,14 +164,5 @@ export default class TripReportFormAdvanced extends LightningElement {
 					Utils.showToast(this, "Error updating record", errorBody, "error");
 				});
 		}
-	}
-
-	validateFields() {
-		const fields = Array.from(this.template.querySelectorAll(".validateMe"));
-		return fields.every((currentField) => currentField.checkValidity());
-	}
-
-	handleBlur() {
-		this.saveButtonDisabled = !this.validateFields();
 	}
 }
